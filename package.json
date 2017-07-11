@@ -9,7 +9,7 @@
     "deploy": "npm run build && sh deploy.sh ",
     "watch": "webpack --watch --watch-poll ",
     "lint": "tslint 'src/**/*.ts' 'demo/src/**/*.ts'",
-    "test": "npm run lint && karma start",
+    "test": "npm run lint",
     "pass": "echo 'it passes'"
   },
   "repository": {

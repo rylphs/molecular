@@ -1,17 +1,15 @@
 import { app, BrowserWindow, screen, Tray, Menu, dialog, ipcMain } from 'electron';
-import { WindowConfig, WindowEntry, WindowManager } from "./window-manager";
+import { WindowConfig, WindowEntry, WindowManager } from './window-manager';
 
-export type PathConfiguration = {
+export interface PathConfiguration {
     path: string, window?: WindowEntry,
     menu?: any, component: any
 }
 
-export type PathEntry = PathConfiguration[];
-
-export type AppConfiguration = {
+export interface AppConfiguration {
     events?: any,
     windows: WindowConfig,
-    paths?: PathEntry,
+    paths?: PathConfiguration[],
     menus?: any,
     global?: any,
     icon?: string;
@@ -20,24 +18,24 @@ export type AppConfiguration = {
 export class MolecularApp {
     private winManager: WindowManager;
     private mainWindow: any;
-    private appIcon:string;
-    private tray:any;
+    private appIcon: string;
+    private tray: any;
 
     constructor(config: AppConfiguration) {
-        if(config.icon){
-            this.appIcon = app.getAppPath() + "/" + config.icon;
+        if (config.icon) {
+            this.appIcon = app.getAppPath() + '/' + config.icon;
             config.windows.main['icon'] = this.appIcon;
             this.tray = new Tray(this.appIcon)
         }
         this.winManager = new WindowManager(config.windows);
         global['AppConfig'] = config.global
-        try{
+        try {
             this.setUpApp();
-        }catch(e){}
-        
+        } catch (e) { }
+
     }
 
-    private setUpApp(){
+    private setUpApp() {
         app.on('ready', () => {
             this.mainWindow = this.winManager.createMainWindow();
         });
