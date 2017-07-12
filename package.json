@@ -7,7 +7,7 @@
     "build": "webpack",
     "build-prod": "webpack -p",
     "deploy": "npm run build && sh deploy.sh ",
-    "watch": "webpack --watch --watch-poll ",
+    "watch": "webpack --progress --colors --watch",
     "lint": "tslint 'src/**/*.ts' 'demo/src/**/*.ts'",
     "test": "npm run lint",
     "pass": "echo 'it passes'"
@@ -36,6 +36,7 @@
     "extract-text-webpack-plugin": "2.1.2",
     "glob": "^7.1.1",
     "pre-commit": "^1.2.2",
+    "rxjs": "^5.4.2",
     "ts-loader": "^2.0.0",
     "tslint": "^5.0.0",
     "tslint-config-standard": "^6.0.1",

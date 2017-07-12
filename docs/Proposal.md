@@ -9,6 +9,7 @@ var HomeComponent, ImageThumbComponent,
 
 class EventManager { }
 
+//Should support hierarchy?
 export var Events = {//exporting to use outside
     FOLDER: {
         CHOOSE: {},

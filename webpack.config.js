@@ -49,6 +49,7 @@ module.exports = {
     extensions: ['.ts', '.js']
   },
   plugins: [
-    new webpack.IgnorePlugin(/test\.ts$/)
+    new webpack.IgnorePlugin(/test\.ts$/),
+    new webpack.ProgressPlugin()
   ]
 }

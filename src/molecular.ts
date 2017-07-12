@@ -1,5 +1,8 @@
 import { app, BrowserWindow, screen, Tray, Menu, dialog, ipcMain } from 'electron';
 import { WindowConfig, WindowEntry, WindowManager } from './window-manager';
+import { ElectronEventBus } from './events/event-bus';
+
+export {Fires, ListenTo} from './events/event-manager';
 
 export interface PathConfiguration {
     path: string, window?: WindowEntry,
@@ -17,11 +20,15 @@ export interface AppConfiguration {
 
 export class MolecularApp {
     private winManager: WindowManager;
+    private eventBus: ElectronEventBus;
     private mainWindow: any;
     private appIcon: string;
     private tray: any;
 
     constructor(config: AppConfiguration) {
+        this.eventBus = new ElectronEventBus();
+        this.eventBus.setupEvents();
+
         if (config.icon) {
             this.appIcon = app.getAppPath() + '/' + config.icon;
             config.windows.main['icon'] = this.appIcon;
@@ -32,6 +39,10 @@ export class MolecularApp {
         try {
             this.setUpApp();
         } catch (e) { }
+
+    }
+
+    run(): void {
 
     }
 
@@ -56,7 +67,4 @@ export class MolecularApp {
         });
     }
 
-    run(): void {
-
-    }
 }

@@ -2,8 +2,6 @@ import { remote, screen, BrowserWindow, app } from 'electron';
 import { Utils } from './utils';
 
 
-const baseURL = 'file://' + app.getAppPath() + '/index.html';
-
 export type WindowEntry = Electron.BrowserWindowConstructorOptions | {
     parent?: WindowEntry; // TODO: Check wheather parent should be string instead.
     listenTo?: any,
@@ -22,26 +20,26 @@ export class WindowManager {
         this.config = config; // TODO: parse window configuration;
     }
 
-    private createWindow(config) {
-        const electronScreen = screen;
-        const size = electronScreen.getPrimaryDisplay().workAreaSize;
-        config.width = config.width || size.width;
-        config.height = config.height || size.height;
-        config.x = config.x || 0;
-        config.y = config.y || 0;
-
-        return new BrowserWindow(config);
-
-    }
-
     createMainWindow() {
+        const baseURL = 'file://' + app.getAppPath() + '/index.html';
         const win = this.createWindow(this.config.main);
-        console.log(baseURL);
         win.loadURL(baseURL);
+        win.webContents.openDevTools();
         if (Utils.isServing()) {
             win.webContents.openDevTools();
         }
         return win;
     }
 
+    private createWindow(config) {
+        const size = screen.getPrimaryDisplay().workAreaSize;
+        config.width = config.width || size.width;
+        config.height = config.height || size.height;
+        config.x = config.x || 0;
+        config.y = config.y || 0;
+
+        const win = new BrowserWindow(config);
+        return win;
+
+    }
 }
