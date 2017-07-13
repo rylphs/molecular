@@ -4,13 +4,14 @@
   "description": "Small framework to easily bind angular and electron toghether.",
   "main": "build/molecular.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack && npm run doc",
     "build-prod": "webpack -p",
     "deploy": "npm run build && sh deploy.sh ",
     "watch": "webpack --progress --colors --watch",
     "lint": "tslint 'src/**/*.ts' 'demo/src/**/*.ts'",
     "test": "npm run lint",
-    "pass": "echo 'it passes'"
+    "pass": "echo 'it passes'",
+    "doc": "typedoc --out docs/jsdoc/ ./"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "ts-loader": "^2.0.0",
     "tslint": "^5.0.0",
     "tslint-config-standard": "^6.0.1",
+    "typedoc": "^0.7.1",
     "typescript": "^2.1.4",
     "vanilla-typescript": "^0.3.2",
     "webpack": "^3.0.0"
