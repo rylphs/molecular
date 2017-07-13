@@ -1,7 +1,14 @@
-import { Utils } from '../utils';
+import { Utils } from '../util/utils';
 import { app, ipcMain, BrowserWindow, ipcRenderer, remote } from 'electron';
 
 
+
+/**
+ * Class used internally by molecular to change messages
+ * between electron main process and windows (renderes).
+ *
+ * @class ElectronEventBus
+ */
 export class ElectronEventBus {
     private LISTENER_ADDED = 'listener-added';
     private EVENT_RAISED = 'event-raised';

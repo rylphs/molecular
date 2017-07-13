@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;route-manager&quot; | molecular</title>
+	<title>&quot;events/decorators&quot; | molecular</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,22 +56,171 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_route_manager_.html">&quot;route-manager&quot;</a>
+					<a href="_events_decorators_.html">&quot;events/decorators&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;route-manager&quot;</h1>
+			<h1>External module &quot;events/decorators&quot;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_events_decorators_.html#bindlisteners" class="tsd-kind-icon">Bind<wbr>Listeners</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_events_decorators_.html#fires" class="tsd-kind-icon">Fires</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_events_decorators_.html#listento" class="tsd-kind-icon">Listen<wbr>To</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="bindlisteners" class="tsd-anchor"></a>
+					<h3>Bind<wbr>Listeners</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">Bind<wbr>Listeners<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in events/decorators.ts:22</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Bind all methods decorated with ListenTo to <code>this</code> instance.</p>
+									<ul>
+										<li>Usage:</li>
+									</ul>
+								</div>
+								<pre><code> <span class="hljs-meta">@BindListeners()</span>
+ <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SomeClass</span></span>{
+     <span class="hljs-meta">@ListenTo(<span class="hljs-meta-string">"myEvent"</span>)</span>
+     calledOnMyEvent(firstEventParameter, secondEventParameter) {
+         <span class="hljs-keyword">this</span>.myMethod(); <span class="hljs-comment">//this correctely bound</span>
+         <span class="hljs-comment">//doSomething...</span>
+     }
+ }
+</code></pre>
+								<dl class="tsd-comment-tags">
+									<dt>classdecorator</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="fires" class="tsd-anchor"></a>
+					<h3>Fires</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">Fires<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">(Anonymous function)</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in events/decorators.ts:40</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Causes the method decorated to fire the event specified.</p>
+									<ul>
+										<li>Usage:</li>
+									</ul>
+								</div>
+								<pre><code> <span class="hljs-meta">@Fires(<span class="hljs-meta-string">"myEvent"</span>)</span>
+ firesMyEvent(firstEventParameter, secondEventParameter) {
+     <span class="hljs-comment">//do something</span>
+     <span class="hljs-keyword">return</span> <span class="hljs-string">"result"</span>; <span class="hljs-comment">// result will be added as event parameter</span>
+ }
+</code></pre>
+								<dl class="tsd-comment-tags">
+									<dt>methoddecorator</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>eventName: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">(Anonymous function)</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="listento" class="tsd-anchor"></a>
+					<h3>Listen<wbr>To</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">Listen<wbr>To<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">(Anonymous function)</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in events/decorators.ts:67</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Causes the method to be called every time the event is fired</p>
+									<ul>
+										<li>Usage:</li>
+									</ul>
+								</div>
+								<pre><code> <span class="hljs-meta">@ListenTo(<span class="hljs-meta-string">"myEvent"</span>)</span>
+ calledOnMyEvent(firstEventParameter, secondEventParameter) {
+     <span class="hljs-comment">//doSomething...</span>
+ }
+</code></pre>
+								<dl class="tsd-comment-tags">
+									<dt>methoddecorator</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>eventName: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">(Anonymous function)</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_application_menu_manager_.html">"application/menu-<wbr>manager"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_application_route_manager_.html">"application/route-<wbr>manager"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_application_window_manager_.html">"application/window-<wbr>manager"</a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="_events_decorators_.html">"events/decorators"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_events_electron_process_event_manager_.html">"events/electron-<wbr>process-<wbr>event-<wbr>manager"</a>
@@ -86,16 +235,7 @@
 						<a href="_events_simple_event_manager_.html">"events/simple-<wbr>event-<wbr>manager"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_index_.html">"index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_menu_manager_.html">"menu-<wbr>manager"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="_molecular_.html">"molecular"</a>
-					</li>
-					<li class="current tsd-kind-external-module">
-						<a href="_route_manager_.html">"route-<wbr>manager"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_service_service_locator_.html">"service/service-<wbr>locator"</a>
@@ -104,15 +244,21 @@
 						<a href="_service_service_registry_.html">"service/service-<wbr>registry"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_utils_.html">"utils"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_window_manager_.html">"window-<wbr>manager"</a>
+						<a href="_util_utils_.html">"util/utils"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_events_decorators_.html#bindlisteners" class="tsd-kind-icon">Bind<wbr>Listeners</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_events_decorators_.html#fires" class="tsd-kind-icon">Fires</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_events_decorators_.html#listento" class="tsd-kind-icon">Listen<wbr>To</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

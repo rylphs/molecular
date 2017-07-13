@@ -1,6 +1,12 @@
 import { EventManager } from './event-manager';
 import { Subject } from 'rxjs/Subject';
 
+
+/**
+ * Class used internally by molecular for process
+ * events in a non electron environment.
+ * @Internal
+ */
 export class SimpleEventManager implements EventManager {
     private events: Subject<{}>[];
 

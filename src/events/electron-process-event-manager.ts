@@ -2,6 +2,11 @@ import { EventManager } from './event-manager';
 import { ipcRenderer, remote } from 'electron';
 import { ElectronEventBus } from './event-bus';
 
+
+/**
+ * Class used internally by molecular for process events in a electron environment.
+ * @Internal
+ */
 export class ElectronProcessEventManager implements EventManager {
     private eventBus: ElectronEventBus;
 

@@ -1,5 +1,5 @@
 import { remote, screen, BrowserWindow, app } from 'electron';
-import { Utils } from './utils';
+import { Utils } from '../util/utils';
 
 
 export type WindowEntry = Electron.BrowserWindowConstructorOptions | {
