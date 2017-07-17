@@ -1,7 +1,9 @@
 import { app, BrowserWindow, screen, Tray, Menu, dialog, ipcMain } from 'electron';
 import { WindowConfig, WindowEntry, WindowManager } from './application/window-manager';
-import { ElectronEventBus } from './events/event-bus';
+import { ElectronEventBus } from './events/electron-event-bus';
 
+// export * from './events/events';
+export {EventManager} from './events/event-manager';
 export {Fires, ListenTo} from './events/decorators';
 
 export interface PathConfiguration {

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;events/event-bus&quot; | molecular</title>
+	<title>&quot;util/decorator&quot; | molecular</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_events_event_bus_.html">&quot;events/event-bus&quot;</a>
+					<a href="_util_decorator_.html">&quot;util/decorator&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;events/event-bus&quot;</h1>
+			<h1>External module &quot;util/decorator&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -71,12 +71,74 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Classes</h3>
+							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/_events_event_bus_.electroneventbus.html" class="tsd-kind-icon">Electron<wbr>Event<wbr>Bus</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_util_decorator_.html#construct" class="tsd-kind-icon">construct</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_util_decorator_.html#createconstructor" class="tsd-kind-icon">create<wbr>Constructor</a></li>
 							</ul>
 						</section>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="construct" class="tsd-anchor"></a>
+					<h3>construct</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">construct<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span>, constructor<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span>, args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/rylphs/molecular/blob/f9cdd3c/src/util/decorator.ts#L4">util/decorator.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>fn: <span class="tsd-signature-type">Function</span></h5>
+								</li>
+								<li>
+									<h5>constructor: <span class="tsd-signature-type">Function</span></h5>
+								</li>
+								<li>
+									<h5>args: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="createconstructor" class="tsd-anchor"></a>
+					<h3>create<wbr>Constructor</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Constructor<span class="tsd-signature-symbol">(</span>baseConstructor<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, copyMetadata<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/rylphs/molecular/blob/f9cdd3c/src/util/decorator.ts#L13">util/decorator.ts:13</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>baseConstructor: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5>callback: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> copyMetadata: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -99,13 +161,16 @@
 						<a href="_events_decorators_.html">"events/decorators"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_events_electron_process_event_manager_.html">"events/electron-<wbr>process-<wbr>event-<wbr>manager"</a>
+						<a href="_events_electron_event_bus_.html">"events/electron-<wbr>event-<wbr>bus"</a>
 					</li>
-					<li class="current tsd-kind-external-module">
-						<a href="_events_event_bus_.html">"events/event-<wbr>bus"</a>
+					<li class=" tsd-kind-external-module">
+						<a href="_events_electron_process_event_manager_.html">"events/electron-<wbr>process-<wbr>event-<wbr>manager"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_events_event_manager_.html">"events/event-<wbr>manager"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_events_events_.html">"events/events"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_events_simple_event_manager_.html">"events/simple-<wbr>event-<wbr>manager"</a>
@@ -119,6 +184,9 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_service_service_registry_.html">"service/service-<wbr>registry"</a>
 					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="_util_decorator_.html">"util/decorator"</a>
+					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_util_utils_.html">"util/utils"</a>
 					</li>
@@ -126,8 +194,11 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_events_event_bus_.electroneventbus.html" class="tsd-kind-icon">Electron<wbr>Event<wbr>Bus</a>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_util_decorator_.html#construct" class="tsd-kind-icon">construct</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_util_decorator_.html#createconstructor" class="tsd-kind-icon">create<wbr>Constructor</a>
 					</li>
 				</ul>
 			</nav>

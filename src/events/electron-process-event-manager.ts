@@ -1,6 +1,6 @@
 import { EventManager } from './event-manager';
 import { ipcRenderer, remote } from 'electron';
-import { ElectronEventBus } from './event-bus';
+import { ElectronEventBus } from './electron-event-bus';
 
 
 /**

@@ -1,8 +1,6 @@
 import { Utils } from '../util/utils';
 import { app, ipcMain, BrowserWindow, ipcRenderer, remote } from 'electron';
 
-
-
 /**
  * Class used internally by molecular to change messages
  * between electron main process and windows (renderes).
@@ -31,6 +29,8 @@ export class ElectronEventBus {
         ipcRenderer.send(this.LISTENER_ADDED, windowId, event);
         ipcRenderer.on(event, (e, ...data) => callback.call({}, ...data));
     }
+
+    registerInstance(instance: any) {}
 
     raiseEvent(event: string, ...data: any[]) {
         if (Utils.isMainProcess()) return;

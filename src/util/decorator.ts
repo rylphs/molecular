@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 // a utility function to generate instances of a class
 function construct(fn:Function, constructor:Function, args:any) {
     var c: any = function() {

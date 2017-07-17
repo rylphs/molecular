@@ -1,8 +1,3 @@
-import { Subject } from 'rxjs/Subject';
-import { ElectronEventBus } from './event-bus';
-import { ElectronProcessEventManager } from './electron-process-event-manager';
-
-
 /**
  * Abstracts events operations. Used internally.
  *
@@ -13,3 +8,7 @@ export interface EventManager {
 
     listenTo(event: any, callback: (arg: any) => void);
 }
+
+export class T {
+    a = 3;
+};

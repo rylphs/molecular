@@ -12,7 +12,7 @@
     "lint": "tslint 'src/**/*.ts' 'demo/src/**/*.ts'",
     "test": "npm run lint",
     "pass": "echo 'it passes'",
-    "doc": "typedoc --out docs/jsdoc/ ./ && cp molecular-128.png docs/jsdoc"
+    "doc": "typedoc --exclude '**/build/**' --out docs/jsdoc/ ./ && cp molecular-128.png docs/jsdoc"
   },
   "repository": {
     "type": "git",
@@ -28,7 +28,7 @@
     "url": "https://github.com/rylphs/molecular/issues"
   },
   "homepage": "https://github.com/rylphs/molecular#readme",
-  "types": "build/src/molecular.d.ts",
+  "types": "build/molecular.d.ts",
   "devDependencies": {
     "@types/node": "^8.0.10",
     "awesome-typescript-loader": "^3.1.3",
@@ -40,7 +40,6 @@
     "pre-commit": "^1.2.2",
     "reflect-metadata": "^0.1.10",
     "rxjs": "^5.4.2",
-    "ts-loader": "^2.0.0",
     "tslint": "^5.0.0",
     "tslint-config-standard": "^6.0.1",
     "typedoc": "^0.7.1",
