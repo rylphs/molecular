@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var fs = require('fs');
 
 const PATHS = {
   src: path.join(__dirname, './src'),
@@ -7,7 +8,6 @@ const PATHS = {
 }
 
 module.exports = {
-
   "node": {
     fs: "empty",
     global: true,
@@ -22,12 +22,13 @@ module.exports = {
     __filename: false
   },
 
-  "externals": {
-    "electron": "electron"
-  },
+  "externals": ['@angular/core', 'electron', 'reflect-metadata']
+   // "reflect-metadata": "reflect-metadata"
+  ,
 
   entry: {
-    'molecular': PATHS.src + '/molecular.ts'
+    'main': PATHS.src + '/main.ts',
+    'renderer': PATHS.src + '/renderer.ts',
   },
   output: {
     path: PATHS.build,
@@ -40,7 +41,11 @@ module.exports = {
     rules: [
       {
         test: /\.ts$/,
-        loader: 'awesome-typescript-loader'
+        
+        loader: 'awesome-typescript-loader',
+         options: {
+          useTranspileModule: true
+        },
       }
     ],
   },
@@ -50,6 +55,10 @@ module.exports = {
   },
   plugins: [
     new webpack.IgnorePlugin(/test\.ts$/),
+    /*new webpack.optimize.CommonsChunkPlugin({
+      name: 'shared',
+      minChunks: ({ resource }) => /shared/.test(resource)
+    }),*/
     new webpack.ProgressPlugin()
   ]
 }

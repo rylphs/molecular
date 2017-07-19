@@ -5,7 +5,7 @@
   "description": "Small framework to easily bind angular and electron toghether.",
   "main": "build/molecular.js",
   "scripts": {
-    "build": "webpack && npm run doc",
+    "build": "webpack",
     "build-prod": "webpack -p",
     "deploy": "npm run build && sh deploy.sh ",
     "watch": "webpack --progress --colors --watch",
@@ -31,20 +31,24 @@
   "types": "build/molecular.d.ts",
   "devDependencies": {
     "@types/node": "^8.0.10",
-    "awesome-typescript-loader": "^3.1.3",
+    "awesome-typescript-loader": "^3.2.1",
     "electron": "^1.6.11",
     "electron-packager": "^8.7.2",
     "electron-rebuild": "^1.5.11",
     "extract-text-webpack-plugin": "2.1.2",
     "glob": "^7.1.1",
     "pre-commit": "^1.2.2",
-    "reflect-metadata": "^0.1.10",
-    "rxjs": "^5.4.2",
     "tslint": "^5.0.0",
     "tslint-config-standard": "^6.0.1",
     "typedoc": "^0.7.1",
     "typescript": "^2.1.4",
     "vanilla-typescript": "^0.3.2",
-    "webpack": "^3.0.0"
+    "webpack": "^3.3.0"
+  },
+  "peerDependencies": {
+    "@angular/core": ">=4.1.3",
+    "reflect-metadata": ">=0.1.8",
+    "rxjs": ">=5.0.1",
+    "zone.js": ">=0.8.4"
   }
 }
