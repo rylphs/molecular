@@ -1,3 +1,4 @@
+import {ServiceRegistry} from '../services/service-registry';
 import { app, BrowserWindow, screen, Tray, Menu, dialog, ipcMain } from 'electron';
 import { WindowConfig, WindowEntry, WindowManager } from './window-manager';
 import { ElectronEventBus } from '../events/electron-event-bus';
@@ -19,13 +20,16 @@ export interface AppConfiguration {
 export class MolecularApp {
     private winManager: WindowManager;
     private eventBus: ElectronEventBus;
+    private serviceRegistry: ServiceRegistry;
     private mainWindow: any;
     private appIcon: string;
     private tray: any;
 
     constructor(config: AppConfiguration) {
         this.eventBus = new ElectronEventBus();
-        this.eventBus.setupEvents();
+        this.serviceRegistry = new ServiceRegistry();
+        this.eventBus.setup();
+        this.serviceRegistry.setup();
 
         if (config.icon) {
             this.appIcon = app.getAppPath() + '/' + config.icon;
