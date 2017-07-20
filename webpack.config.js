@@ -22,7 +22,7 @@ module.exports = {
     __filename: false
   },
 
-  "externals": ['@angular/core', 'electron', 'reflect-metadata']
+  "externals": ['@angular/core', 'electron', 'reflect-metadata', 'rxjs/Subject']
    // "reflect-metadata": "reflect-metadata"
   ,
 
@@ -57,7 +57,8 @@ module.exports = {
     new webpack.IgnorePlugin(/test\.ts$/),
     /*new webpack.optimize.CommonsChunkPlugin({
       name: 'shared',
-      minChunks: ({ resource }) => /shared/.test(resource)
+      minChunks: ({ resource }) => /shared/.test(resource),
+      chunks: ["main", "renderer"]
     }),*/
     new webpack.ProgressPlugin()
   ]

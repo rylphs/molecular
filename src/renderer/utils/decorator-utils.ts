@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 
 // a utility function to generate instances of a class
-function construct(fn: Function, constructor: Function, args: any) {
+function constructInstance(fn: Function, constructor: Function, args: any) {
     const c: any = function () {
         fn.apply(this, args);
         return constructor.apply(this, args);
@@ -11,8 +11,9 @@ function construct(fn: Function, constructor: Function, args: any) {
 }
 
 export function createConstructor(baseConstructor: any, callback: any, includeMetadata: boolean = false) {
+    console.log('working ing ', baseConstructor);
     const newConstructor: any = function (...args: any[]) {
-        return construct(callback, baseConstructor, args);
+        return constructInstance(callback, baseConstructor, args);
     }
     newConstructor.prototype = baseConstructor.prototype; // copy prototype (fix intanceof)
     if (includeMetadata) {

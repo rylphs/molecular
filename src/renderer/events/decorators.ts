@@ -1,6 +1,6 @@
 import { ElectronUtils } from '../../shared/electron-utils';
 import {ReflectiveInjector} from '@angular/core';
-import {createConstructor} from '../../shared/decorator-utils';
+import {createConstructor} from '../utils/decorator-utils';
 import { EventService } from './event-service';
 import { ElectronEventService } from './electron-event.service';
 import { SimpleEventService } from './simple-event.service';

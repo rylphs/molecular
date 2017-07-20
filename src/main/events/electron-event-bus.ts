@@ -20,7 +20,7 @@ export class ElectronEventBus {
 
     constructor() { }
 
-    setupEvents() {
+    setup() {
         if (!ElectronUtils.isMainProcess()) return;
 
         ipcMain.on(LISTENER_ADDED, this.setupNewListener.bind(this));
@@ -28,9 +28,14 @@ export class ElectronEventBus {
     }
 
     private setupNewListener(e: any, windowId: number, event: string) {
+        // TODO: Refatorar para usar e.sender no lugar de windowID
         const window = BrowserWindow.fromId(windowId);
-        this.eventChannels[event] = this.eventChannels[event] || [];
+        this.eventChannels[event] = this.eventChannels[event] || {};
         this.eventChannels[event][windowId] = window.webContents;
+
+        window.on('close', () => 
+            delete this.eventChannels[event][windowId]
+        );
     }
 
     private handleEvent(e: any, event: string, ...data: any[]) {

@@ -212,5 +212,34 @@ export class ImageDetailComponent2 {
     }
 }
 
+//Service instantiation
+import {ServiceLocator} from 'molecular/renderer';
+
+@NgModule({
+  declarations: [...],
+  imports: [...],
+  providers: ServiceLocator.provide(
+    FileSystemService, StatusService,
+    MenuService, WindowService, WindowGuard
+  ),
+  bootstrap: [...]
+})
+export class AppModule { }
+
+//ServiceLocator.ts
+export class ServiceLocator {
+	provide(...services){
+		const providers = [];
+		for(const i in services){
+			providers.push(
+				{provide: services[i], useFactory: this.createFactoryFor(services[i]};
+			);
+		}
+		return providers;
+	}
+
+	createFactoryFor(service){}
+}
+
 //*/
 ```
