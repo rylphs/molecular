@@ -44,6 +44,10 @@ export class MolecularApp {
 
     }
 
+    register(token, service) {
+       // this.serviceRegistry.register(token, service);
+    }
+
     run(): void {
 
     }

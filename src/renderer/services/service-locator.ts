@@ -1,5 +1,5 @@
 import { remote, ipcRenderer } from 'electron';
-import { ReflectiveInjector, ReflectiveKey } from '@angular/core';
+import { ReflectiveInjector, ReflectiveKey, Injectable } from '@angular/core';
 import { REGISTER_SERVICE } from '../../shared/events';
 
 
@@ -58,10 +58,13 @@ export class ServiceLocator {
     private constructor(key: string, services: any[]) {
         this.key = key;
         this.services = services;
+
+        // Enable to allow remote calling of services
+        // services.forEach((service) => Reflect.decorate([Injectable()], service));
+
         const baseProviders = services.map(function(service: any){
             return { provide: service, useClass: service };
         });
-        console.log('baseProviders', baseProviders);
         const providers = ReflectiveInjector.resolve(baseProviders);
         this.injector = ReflectiveInjector.fromResolvedProviders(providers);
     }
@@ -69,12 +72,22 @@ export class ServiceLocator {
     public createServiceFactory(service: any) {
         const thisInstance = this;
         return function () {
-            console.log('trying to get instance', thisInstance);
             const instance = thisInstance.injector.get(service);
             const token = ReflectiveKey.get(service).displayName;
-            console.log('factory', REGISTER_SERVICE, thisInstance.key, token, instance)
-            return ipcRenderer.sendSync(REGISTER_SERVICE, thisInstance.key, token, instance);
+            const o: any = ipcRenderer.sendSync(REGISTER_SERVICE, thisInstance.key, token, instance);
+            for(const prop in service.prototype) {
+                const s = service.prototype[prop];
+                if(s instanceof Function){
+                    o[prop] = s;
+                }
+            }
+            return o;
         };
+    }
+
+    private toInjectable(service){
+         const injectable = Injectable();
+         injectable.call(injectable, service);
     }
 
     private createProviders() {
@@ -86,7 +99,6 @@ export class ServiceLocator {
                 useFactory: this.createServiceFactory(service)
             })
         }
-        console.log('providers', providers);
         return providers;
     }
 }
