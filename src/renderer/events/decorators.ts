@@ -67,7 +67,6 @@ export function Listener(targetConstructor: any) {
  * @returns
  */
 export function Fires(eventName: string) {
-    console.log('fires');
     return function (target: any, key: string, definition: any) {
         const originalMethod = definition.value;
         definition.value = function (...args: any[]) {

@@ -11,7 +11,6 @@ function constructInstance(fn: Function, constructor: Function, args: any) {
 }
 
 export function createConstructor(baseConstructor: any, callback: any, includeMetadata: boolean = false) {
-    console.log('working ing ', baseConstructor);
     const newConstructor: any = function (...args: any[]) {
         return constructInstance(callback, baseConstructor, args);
     }
