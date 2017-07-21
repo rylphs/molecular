@@ -1,5 +1,5 @@
 import { remote, ipcRenderer } from 'electron';
-import { ReflectiveInjector, ReflectiveKey, Injectable } from '@angular/core';
+import { ReflectiveInjector, ReflectiveKey } from '@angular/core';
 import { REGISTER_SERVICE } from '../../shared/events';
 
 
@@ -85,9 +85,8 @@ export class ServiceLocator {
         };
     }
 
+    // TODO: Parece que o angular nao necessita da anotacao Injectable desde que haja qualquer anotacao na classe. Averiguar
     private toInjectable(service){
-         const injectable = Injectable();
-         injectable.call(injectable, service);
     }
 
     private createProviders() {

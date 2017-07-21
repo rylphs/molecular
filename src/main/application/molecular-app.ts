@@ -2,6 +2,7 @@ import {ServiceRegistry} from '../services/service-registry';
 import { app, BrowserWindow, screen, Tray, Menu, dialog, ipcMain } from 'electron';
 import { WindowConfig, WindowEntry, WindowManager } from './window-manager';
 import { ElectronEventBus } from '../events/electron-event-bus';
+import 'reflect-metadata';
 
 export interface PathConfiguration {
     path: string, window?: WindowEntry,
@@ -45,7 +46,7 @@ export class MolecularApp {
     }
 
     register(token, service) {
-       // this.serviceRegistry.register(token, service);
+        this.serviceRegistry.register(token, service);
     }
 
     run(): void {
