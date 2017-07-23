@@ -11,5 +11,6 @@
         "**/vendor": true
     },
     "todohighlight.isEnable": true,
-    "tslint.run": "onType"
+    "tslint.run": "onType",
+    "workbench.colorTheme": "Monokai"
 }
