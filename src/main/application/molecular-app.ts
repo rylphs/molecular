@@ -1,8 +1,10 @@
-import {ServiceRegistry} from '../services/service-registry';
+import 'reflect-metadata';
+import { ServiceRegistry, ProviderConfig } from '../services/service-registry';
 import { app, BrowserWindow, screen, Tray, Menu, dialog, ipcMain } from 'electron';
 import { WindowConfig, WindowEntry, WindowManager } from './window-manager';
 import { ElectronEventBus } from '../events/electron-event-bus';
-import 'reflect-metadata';
+import { Serializer } from '../../shared/serializer';
+
 
 export interface PathConfiguration {
     path: string, window?: WindowEntry,
@@ -10,6 +12,7 @@ export interface PathConfiguration {
 }
 
 export interface AppConfiguration {
+    providers?: ProviderConfig;
     events?: any,
     windows: WindowConfig,
     paths?: PathConfiguration[],
@@ -19,6 +22,7 @@ export interface AppConfiguration {
 }
 
 export class MolecularApp {
+    private serializer: Serializer;
     private winManager: WindowManager;
     private eventBus: ElectronEventBus;
     private serviceRegistry: ServiceRegistry;
@@ -28,7 +32,8 @@ export class MolecularApp {
 
     constructor(config: AppConfiguration) {
         this.eventBus = new ElectronEventBus();
-        this.serviceRegistry = new ServiceRegistry();
+        this.serializer = new Serializer();
+        this.serviceRegistry = new ServiceRegistry(config.providers, this.serializer);
         this.eventBus.setup();
         this.serviceRegistry.setup();
 
@@ -43,10 +48,6 @@ export class MolecularApp {
             this.setUpApp();
         } catch (e) { }
 
-    }
-
-    register(token, service) {
-        this.serviceRegistry.register(token, service);
     }
 
     run(): void {

@@ -1,7 +1,6 @@
 import { remote, ipcRenderer } from 'electron';
-import { ReflectiveInjector, ReflectiveKey } from '@angular/core';
-import { REGISTER_SERVICE } from '../../shared/events';
-
+import { ReflectiveKey } from '@angular/core';
+import { Events } from '../../shared/events';
 
 /**
  * Sets up a factory for services inside electron
@@ -24,11 +23,7 @@ import { REGISTER_SERVICE } from '../../shared/events';
  * @class ServiceLocator
  */
 export class ServiceLocator {
-    private injector: ReflectiveInjector;
     private services: any[];
-    private key: string;
-    private registry: any;
-
 
     /**
      * Function to generate module providers param
@@ -51,42 +46,41 @@ export class ServiceLocator {
      *
      * @memberOf ServiceLocator
      */
-    static provide(key: string, ...services: any[]) {
-        return new ServiceLocator(key, services).createProviders();
+    static provide(...services: any[]) {
+        return new ServiceLocator(services).createProviders();
     }
 
-    private constructor(key: string, services: any[]) {
-        this.key = key;
+    private constructor(services: any[]) {
         this.services = services;
-
-        // Enable to allow remote calling of services
-        // services.forEach((service) => Reflect.decorate([Injectable()], service));
-
-        const baseProviders = services.map(function(service: any){
-            return { provide: service, useClass: service };
-        });
-        const providers = ReflectiveInjector.resolve(baseProviders);
-        this.injector = ReflectiveInjector.fromResolvedProviders(providers);
     }
 
-    public createServiceFactory(service: any) {
-        const thisInstance = this;
+    private createServiceFactory(service: any) {
         return function () {
-            const instance = thisInstance.injector.get(service);
             const token = ReflectiveKey.get(service).displayName;
-            const o: any = ipcRenderer.sendSync(REGISTER_SERVICE, thisInstance.key, token, instance);
-            for(const prop in service.prototype) {
-                const s = service.prototype[prop];
-                if(s instanceof Function){
-                    o[prop] = s;
+            const instance = ipcRenderer.sendSync(Events.GET_SERVICE, token);
+            this.proxyAcess(service, instance, token);
+            return instance;
+        }.bind(this);
+    }
+
+    private proxyAcess(service, instance, token) {
+        for(const prop in service) {
+            if(service[prop] instanceof Function) {
+                instance[prop] = function(){
+                    return ipcRenderer.sendSync(Events.CALL_METHOD, token, prop, ...arguments);
                 }
             }
-            return o;
-        };
-    }
-
-    // TODO: Parece que o angular nao necessita da anotacao Injectable desde que haja qualquer anotacao na classe. Averiguar
-    private toInjectable(service){
+            else {
+                Object.defineProperty(service, prop, {
+                    get: function(){
+                        return ipcRenderer.sendSync(Events.GET_PROPERTY, token, prop);
+                    },
+                    set: function(value:any){
+                        return ipcRenderer.sendSync(Events.SET_PROPERTY, token, prop, value);
+                    }
+                })
+            }
+        }
     }
 
     private createProviders() {

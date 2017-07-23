@@ -1,6 +1,6 @@
 import { ElectronUtils } from '../../shared/electron-utils';
 import { app, ipcMain, BrowserWindow} from 'electron';
-import { LISTENER_ADDED, EVENT_RAISED } from '../../shared/events';
+import { Events } from '../../shared/events';
 
 interface EventChannel {
     [id: number]: { send(channel: string, ...args: any[]): void };
@@ -23,8 +23,8 @@ export class ElectronEventBus {
     setup() {
         if (!ElectronUtils.isMainProcess()) return;
 
-        ipcMain.on(LISTENER_ADDED, this.setupNewListener.bind(this));
-        ipcMain.on(EVENT_RAISED, this.handleEvent.bind(this));
+        ipcMain.on(Events.LISTENER_ADDED, this.setupNewListener.bind(this));
+        ipcMain.on(Events.EVENT_RAISED, this.handleEvent.bind(this));
     }
 
     private setupNewListener(e: any, windowId: number, event: string) {
