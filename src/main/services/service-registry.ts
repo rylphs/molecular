@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { ipcMain, app } from 'electron';
 import { Events } from '../../shared/events';
-import { Serializer } from "../../shared/serializer";
+import { Serializer } from '../../shared/serializer';
 
 export type  ServiceClass = new(...params) => any;
 
@@ -84,7 +84,7 @@ export class ServiceRegistry {
     }
 
     private instantiate(token) {
-        if(!this.providers[token]){
+        if(!this.providers[token]) {
             // TODO: Adirionar tratamento de erro. Provider nao registrado.
             return;
         }

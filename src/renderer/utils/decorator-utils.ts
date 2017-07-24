@@ -26,7 +26,7 @@ export function createConstructor(baseConstructor: any, callback: any, includeMe
     return newConstructor; // return new constructor (will override original)
 }
 
-export function copyMetadata(src, dst){
+export function copyMetadata(src, dst) {
     const metaData = Reflect.getMetadataKeys(src);
         for (const i in metaData) {
             const key = metaData[i];

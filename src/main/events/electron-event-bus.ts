@@ -33,7 +33,7 @@ export class ElectronEventBus {
         this.eventChannels[event] = this.eventChannels[event] || {};
         this.eventChannels[event][windowId] = window.webContents;
 
-        window.on('close', () => 
+        window.on('close', () =>
             delete this.eventChannels[event][windowId]
         );
     }

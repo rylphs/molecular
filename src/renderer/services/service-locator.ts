@@ -75,7 +75,7 @@ export class ServiceLocator {
                     get: function(){
                         return ipcRenderer.sendSync(Events.GET_PROPERTY, token, prop);
                     },
-                    set: function(value:any){
+                    set: function(value: any) {
                         return ipcRenderer.sendSync(Events.SET_PROPERTY, token, prop, value);
                     }
                 })
