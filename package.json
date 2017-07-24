@@ -12,7 +12,7 @@
     "lint": "tslint 'src/**/*.ts' 'demo/src/**/*.ts'",
     "test": "npm run lint",
     "pass": "echo 'it passes'",
-    "doc": "typedoc --exclude '**/build/**' --out docs/jsdoc/ ./ && cp molecular-128.png docs/jsdoc"
+    "doc": "typedoc --exclude '**/build/**' --exclude '**/tests/**' --out docs/jsdoc/ ./ && cp molecular-128.png docs/jsdoc"
   },
   "repository": {
     "type": "git",
