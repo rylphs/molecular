@@ -10,7 +10,8 @@
   },
   "exclude": [
     "node_modules",
-    "demo"
+    "demo",
+    "docs"
   ],
   "types": [
     "node",
