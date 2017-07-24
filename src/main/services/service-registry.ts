@@ -38,7 +38,7 @@ export class ServiceRegistry {
             if(!this.isProvider(provider)) {
                 provider = {provide: provider, useClass: provider}
             }
-            this.providers[provider.provide.name] = provider;
+            this.providers[(<any> provider.provide).name] = provider;
         }
     }
 
@@ -74,13 +74,13 @@ export class ServiceRegistry {
     private isProvider(
         provider: UseFactoryProvider |
             UseClassProvider | ServiceClass): provider is UseClassProvider | UseFactoryProvider {
-        return (<any>provider).provide ? true : false;
+        return (<any> provider).provide ? true : false;
     }
 
     private isFactoryProvider(
         provider: UseFactoryProvider |
             UseClassProvider | ServiceClass): provider is UseFactoryProvider {
-        return (<UseFactoryProvider>provider).useFactory ? true : false;
+        return (<UseFactoryProvider> provider).useFactory ? true : false;
     }
 
     private instantiate(token) {

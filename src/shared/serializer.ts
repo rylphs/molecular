@@ -36,11 +36,11 @@ export class Serializer {
     }
 
     addSerializer(cls: new(...any) => any, serializer?: SerializeMethod) {
-        if(serializer) this.serializers[cls.name] = serializer;
+        if(serializer) this.serializers[(<any> cls).name] = serializer;
     }
 
     addConstructor(cls: new(...any) => any, constructor?: any) {
-        this.constructors[cls.name] = constructor || (() => new cls());
+        this.constructors[(<any> cls).name] = constructor || (() => new cls());
     }
 
     serialize(object: any) {
