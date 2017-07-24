@@ -56,6 +56,7 @@ export class ServiceLocator {
 
     private createServiceFactory(service: any) {
         return function () {
+            console.log(service);
             const token = ReflectiveKey.get(service).displayName;
             const instance = ipcRenderer.sendSync(Events.GET_SERVICE, token);
             this.proxyAcess(service, instance, token);
@@ -67,7 +68,7 @@ export class ServiceLocator {
         for(const prop in service) {
             if(service[prop] instanceof Function) {
                 instance[prop] = function(){
-                    return ipcRenderer.sendSync(Events.CALL_METHOD, token, prop, ...arguments);
+                    return ipcRenderer.sendSync(Events.CALL_METHOD, token, prop, arguments);
                 }
             }
             else {

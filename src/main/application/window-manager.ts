@@ -21,7 +21,8 @@ export class WindowManager {
     }
 
     createMainWindow() {
-        const baseURL = 'file://' + app.getAppPath() + '/index.html';
+        //const baseURL = 'file://' + app.getAppPath() + '/index.html';
+        const baseURL = 'http://0.0.0.0:9876/';
         const win = this.createWindow(this.config.main);
         win.loadURL(baseURL);
         win.webContents.openDevTools();
