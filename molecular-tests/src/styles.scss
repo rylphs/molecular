@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+html, body {
+  margin: 0;
+  padding: 0;
+
+  height: 100%;
+}
+
+.ui-tree{
+    width: auto !important;
+}
+
+
+.ui-tree.ui-widget-content{
+    background-color: transparent !important;
+}
+
+$bg: #EFEFEF;
