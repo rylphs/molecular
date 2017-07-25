@@ -13,6 +13,7 @@ export interface PathConfiguration {
 
 export interface AppConfiguration {
     providers?: ProviderConfig;
+    baseUrl?: string;
     events?: any,
     windows: WindowConfig,
     paths?: PathConfiguration[],
@@ -37,12 +38,14 @@ export class MolecularApp {
         this.eventBus.setup();
         this.serviceRegistry.setup();
 
+        const url = config.baseUrl || 'file://' + app.getAppPath() + '/index.html';
+
         if (config.icon) {
             this.appIcon = app.getAppPath() + '/' + config.icon;
             config.windows.main['icon'] = this.appIcon;
             this.tray = new Tray(this.appIcon)
         }
-        this.winManager = new WindowManager(config.windows);
+        this.winManager = new WindowManager(config.windows, url);
         global['AppConfig'] = config.global
         try {
             this.setUpApp();

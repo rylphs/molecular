@@ -2,10 +2,10 @@ import { remote, screen, BrowserWindow, app } from 'electron';
 import { ElectronUtils } from '../../shared/electron-utils';
 
 
-export type WindowEntry = Electron.BrowserWindowConstructorOptions | {
+export type WindowEntry = Electron.BrowserWindowConstructorOptions & {
     parent?: WindowEntry; // TODO: Check wheather parent should be string instead.
     listenTo?: any,
-    fires?: any,
+    fires?: any
 }
 
 export interface WindowConfig {
@@ -16,15 +16,13 @@ export class WindowManager {
     private windows = {};
     private config: any;
 
-    constructor(config: WindowConfig) {
+    constructor(config: WindowConfig, private baseUrl: string) {
         this.config = config; // TODO: parse window configuration;
     }
 
     createMainWindow() {
-        //const baseURL = 'file://' + app.getAppPath() + '/index.html';
-        const baseURL = 'http://0.0.0.0:9876/';
         const win = this.createWindow(this.config.main);
-        win.loadURL(baseURL);
+        win.loadURL(this.baseUrl);
         win.webContents.openDevTools();
         if (ElectronUtils.isServing()) {
             win.webContents.openDevTools();

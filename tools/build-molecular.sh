@@ -1,19 +1,19 @@
+# Build molecular for tests.
 (
-	molecular=~/workspaces/molecular;
-	starter=~/workspaces/molecular-starter;
+	moleculardir=./molecular;
+	testsdir=../molecular-tests;
+	libdir=$testsdir/node_modules/molecular;
 
-	appmodule=~/workspaces/molecular-starter/src/app/app.module.ts;
-	dst=~/workspaces/molecular-starter/node_modules/molecular;
-
-	cd $molecular;
+	cd $moleculardir;
 	rm -rf ./build/*
 	npm run build && { 
-		rm -rf $dst/*
-		ls | grep -v 'node_modules' |xargs -I xx cp -avr xx $dst/;
-		touch $dst/build/renderer.js;
-		touch $dst/build/main.js;
-		touch $starter/dist/molecular.bundle.js;
-		touch $appmodule;
+		rm -rf $libdir;
+		mkdir $libdir;
+		ls | grep -v 'node_modules' | grep -v docs | xargs -I xx cp -avr xx $libdir/;
+		touch $libdir/build/renderer.js;
+		touch $libdir/build/main.js;
+		touch $testsdir/dist/molecular.bundle.js;
+		touch $testsdir/src/app/app.module.ts;
 	};
 
 )
