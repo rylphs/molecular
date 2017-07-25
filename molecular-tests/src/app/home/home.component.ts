@@ -1,3 +1,4 @@
+import {ElectronManagedService} from '../services/electron-managed.service';
 import {
   Component, OnInit, ChangeDetectorRef,
   EventEmitter, ViewChildren, QueryList, ReflectiveKey
@@ -9,13 +10,11 @@ import {
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  rand: string;
-  imagesDisplayed: string[] = [];
-  currentFolder = '/home/07125220690/Documentos';
-  selectedFolder: string;
-  notifyme: EventEmitter<string> = new EventEmitter();
+  title = 'App works !';
 
-  constructor() {
+  constructor(private el: ElectronManagedService) {
+    const p =  new Proxy(ElectronManagedService, {});
+    console.log('p answer', el.p());
   }
 
   ngOnInit() {}

@@ -2,7 +2,7 @@ import 'zone.js';
 import 'reflect-metadata';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ReflectiveInjector, ReflectiveKey, Injector, InjectionToken } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
@@ -11,11 +11,10 @@ import { HomeComponent } from './home/home.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { TreeModule } from 'primeng/components/tree/tree';
-import { OverlayPanelModule } from 'primeng/components/overlaypanel/overlaypanel';
-
 import {ServiceLocator} from 'molecular/build/renderer';
+import {ElectronManagedService} from './services/electron-managed.service';
 
+@ServiceLocator.provide(ElectronManagedService)
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,9 +25,7 @@ import {ServiceLocator} from 'molecular/build/renderer';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    TreeModule,
-    OverlayPanelModule
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

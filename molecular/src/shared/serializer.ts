@@ -10,7 +10,7 @@ export interface SerializerRegistry {
 export class Serializer {
     constructors: {
         [name: string]: (...args) => any
-    }
+    } = {};
     serializers: SerializerRegistry = {
         Date: {
             serialize: (date: Date) => date.getTime(),
@@ -50,7 +50,14 @@ export class Serializer {
              type: className,
              data: {}
          };
-        // Non primitives, check for serializers
+
+         // data is an Array, serialize values
+         if(object instanceof Array) {
+             serialized.data = object.map((value)=> this.serialize(value));
+             return serialized;
+         }
+
+        // data is non primitives, check for serializers
         if(this.serializers[className]) {
             serialized.data = this.serializers[className].serialize(object);
             return serialized;
@@ -68,7 +75,12 @@ export class Serializer {
 
          const className = data.type;
 
-        // Non primitives, check for serializers
+         // data is Array, deserealize values
+         if(className === 'Array') {
+             return data.data.map((value)=> this.deserialize(value));
+         }
+
+        // data is non primitives, check for serializers
         if(this.serializers[className]) {
             return this.serializers[className].deserialize(data.data);
         }

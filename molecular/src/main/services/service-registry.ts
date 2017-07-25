@@ -29,7 +29,7 @@ export type ProviderConfig = Array<UseClassProvider | UseFactoryProvider | Servi
  */
 export class ServiceRegistry {
     private registry = {};
-    private providers: Providers;
+    private providers: Providers = {};
 
     constructor(providers: ProviderConfig, private serializer: Serializer) {
         providers = providers || [];
@@ -51,10 +51,13 @@ export class ServiceRegistry {
         }.bind(this));
 
         ipcMain.on(Events.CALL_METHOD, function (event, token: string, method: string, ...parameters) {
+            console.log('call of ' + method );
+            console.log(parameters.length);
             if (!this.registry[token]) return;
             const service = this.registry[token]
             parameters = parameters.map(this.serializer.deserialize.bind(this.serializer));
-            const result = service[method].call(service, parameters);
+            const result = service[method].apply(service, parameters);
+           // console.log('result', result);
             event.returnValue = this.serializer.serialize(result);
         }.bind(this));
 
@@ -98,6 +101,7 @@ export class ServiceRegistry {
             const parameter = typeParameters[i];
             parameters.push(this.instantiate(parameter.name));
         };
+        console.log(parameters, provider.provide.name);
         return new provider.provide(...parameters);
     }
 
@@ -109,5 +113,19 @@ export class ServiceRegistry {
         });
     }
 }
+
+/*
+Uncaught Exception:
+Uncaught Exception:
+TypeError: Cannot read property 'undefined' of undefined
+    at Serializer.deserialize (/home/07125220690/workspaces/molecular/molecular-tests/node_modules/molecular/build/main.js:695:43)
+    at Array.map (native)
+    at ServiceRegistry.<anonymous> (/home/07125220690/workspaces/molecular/molecular-tests/node_modules/molecular/build/main.js:475:37)
+    at emitMany (events.js:127:13)
+    at EventEmitter.emit (events.js:201:7)
+    at WebContents.<anonymous> (/home/07125220690/workspaces/molecular/molecular-tests/node_modules/electron/dist/resources/electron.asar/browser/api/web-contents.js:256:37)
+    at emitTwo (events.js:106:13)
+    at WebContents.emit (events.js:191:7)
+*/
 
 
