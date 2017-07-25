@@ -38,10 +38,13 @@ module.exports = {
   },
   devtool: 'source-map',
   module: {
+    noParse:function(module){
+      console.log('ignore ?', module);
+    },
     rules: [
       {
         test: /\.ts$/,
-        
+        exclude: /molecular-starter/,
         loader: 'awesome-typescript-loader',
          options: {
           useTranspileModule: true
@@ -55,6 +58,7 @@ module.exports = {
   },
   plugins: [
     new webpack.IgnorePlugin(/test\.ts$/),
+    new webpack.IgnorePlugin(/\.ts$/, /tests\/molecular-starter/),
     /*new webpack.optimize.CommonsChunkPlugin({
       name: 'shared',
       minChunks: ({ resource }) => /shared/.test(resource),
