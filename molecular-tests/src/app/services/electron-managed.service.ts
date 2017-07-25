@@ -1,11 +1,11 @@
 import {ipcMain, app} from 'electron';
 
 export class ElectronManagedService {
-    constructor(){
+    constructor() {
         console.log('ipcMain? ', ipcMain)
     }
 
-    p(){
+    p() {
         return ipcMain.eventNames();
     }
 }
